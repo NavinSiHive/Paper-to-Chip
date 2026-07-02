@@ -1,0 +1,10 @@
+# never ship engine internals or heavy intermediates
+*.tar.gz
+**/cal/**
+**/engine/**
+*.ext
+*.spice.bak
+__pycache__/
+
+# never commit raw (uncompressed) GDS — use .gz (GitHub 100MB limit)
+*.gds

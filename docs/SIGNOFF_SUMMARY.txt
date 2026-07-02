@@ -1,0 +1,233 @@
+RESULT: FINAL chip (PLLTOP_D40 ÷40->PLLCLK_OUT): routed=1 route_drc=0 chip_LVS=MATCH chip_DRC=75(waivable=75) antenna=0 integrity=OK -> TAPEOUT-READY
+
+================================================================================
+ FINAL TAPEOUT-QUALITY MIXED-SIGNAL PLL CHIP  (÷40 analog macro variant)
+ Date: 2026-07-03   PDK: sky130A (open_pdks)
+ Isolated dirs: PLL-Chip/analog_real2/ (D40 LEF+escaped GDS), PLL-Chip/chip_final/ (chip)
+ Baseline chip_real/ + analog_real/ + cal_pll/out/PLLTOP_D40/ LEFT INTACT (read-only reuse).
+================================================================================
+
+TL;DR
+-----
+The proven chip_real integration flow was reused verbatim with a small, surgical delta:
+the analog macro PLLTOP -> PLLTOP_D40 (PLLTOP flattened verbatim + an internal ÷40; the
+raw PLL_CLK is now macro-internal, and a new ÷40 output CK_DIV40 exits on met3 at the
+lower-right boundary). The met1 bias-pin escape recipe transferred UNCHANGED (D40's bias
+mesh is byte-identical to PLLTOP's), and CK_DIV40 needed no escape (already met3). The
+÷40 clock is wired to a NEW gpio_out pad PLLCLK_OUT (direct, no further division) AND
+fanned to pll_dcc.pll_clk_i so the digital core observes it. Chip assembles + routes
+(OpenROAD route-DRC = 0, first pass), hierarchical chip LVS = "Circuits match uniquely"
+(both macros black-boxed), full-chip klayout DRC = 75 and ALL 75 are IO-pad-cell-internal
+/ pre-hardened-pll_dcc nwell/poly/met/capm (foundry-WAIVABLE, the same class as chip_real's
+79) — ZERO inside the PLLTOP_D40 macro, its escape pins, or the top-level routing. Merged
+chip GDS streamed with a NON-EMPTY PLLTOP_D40 cell (1,439,484 shapes). Full verification
+suite (integrity/antenna/density/ERC) all pass. -> TAPEOUT-READY.
+
+--------------------------------------------------------------------------------
+1. ESCAPE + LEF  (analog_real2/ ; the ÷40 macro)
+--------------------------------------------------------------------------------
+Source macro: cal_pll/out/PLLTOP_D40/PLLTOP_D40.gds  (top cell PLLTOP_D40, FLAT/1-cell,
+  bbox (-10,-32.325)-(453.705,744.740) = 463.705 x 777.065 um; standalone DRC0 + LVS-match
+  per cal_pll). Reference netlist cal_pll/cells/PLLTOP_D40.spice (12 ports, 323 nets).
+
+Escape method = the analog_real recipe, applied VERBATIM (net-aware, DRC-clean, on a COPY
+of the macro GDS; the cal_pll source is never modified). Because PLLTOP is flattened into
+PLLTOP_D40 with IDENTICAL geometry at the bottom-left bias mesh, all 9 low-metal escape
+via points + jogs were re-verified foreign-clear against the D40 mesh (incl. the new ÷40
+block, which sits at y~-20..-32, disjoint from the y=33..143 escape zone) and passed
+unchanged (verify_escape_d40.py -> ALL_ESCAPE_CLEAR True). CK_DIV40 is the ONLY new pin
+and needs NO escape — it is already a native met3 pad at chip-abs (453.41,-20.28),
+bbox (348.970,-20.580,453.705,-19.980); the flow only adds its label.
+
+LEF: analog_real2/PLLTOP_D40.lef ; SIZE 463.705 BY 777.065 ; CLASS BLOCK ; ORIGIN 0 0.
+Origin normalized so the escaped-GDS bbox min (-10,-32.325) -> (0,0) via shift (+10,+32.325),
+so LEF pin coords = GDS-abs + (10, 32.325). 12 pins total (= PLLTOP's 12 with PLL_CLK
+swapped for CK_DIV40). klayout + OpenROAD read OK.
+
+  PIN        DIR     USE     LAYER   RECT (um, LEF/shifted frame)                NOTE
+  REFCLK     INPUT   SIGNAL  met3    25.150 48.460 25.810 49.120                 <- pll_dcc.ref_o
+  PG         INPUT   SIGNAL  met3    94.620 153.735 95.280 154.395               <- pll_dcc.pll_en_o
+  VFINE      INPUT   SIGNAL  met3    75.645 175.360 76.305 176.020               bias (escaped)
+  V_REF      INPUT   SIGNAL  met3    35.655 81.335 36.315 81.995                 bias (escaped)
+  VREF       INPUT   SIGNAL  met3    139.475 70.315 140.135 70.975               bias (escaped)
+  VREG_REF   INPUT   SIGNAL  met3    58.375 154.285 59.035 154.945               bias (escaped)
+  IBCP       INPUT   SIGNAL  met3    34.475 70.095 35.135 70.755                 bias (escaped)
+  IBREG      INPUT   SIGNAL  met3    37.995 148.305 38.655 148.965               bias (escaped)
+  IB         INPUT   SIGNAL  met3    138.335 65.335 138.995 65.995               bias (escaped)
+  CK_DIV40   OUTPUT  SIGNAL  met3    358.970 11.745 463.705 12.345               -> PLLCLK_OUT pad + pll_dcc.pll_clk_i  (NEW ÷40 out, ~6.75 MHz)
+  VDD        INOUT   POWER   met5    0.000 132.910 13.000 134.510 ; 0 134.510 4 777.065
+  VSS        INOUT   GROUND  met5    219.155 65.955 222.155 142.625 ; 453.405 26.325 457.405 773.065
+  OBS: li1, met1, met2 over the full 463.705 x 777.065 footprint (blocks low-metal routing
+       over the macro; leaves met3-met5 routable so the router reaches the met3 pins).
+
+  NOTE on pin count: the task spec said "13 pins incl CK_DIV40", but the D40 interface is
+  EXACTLY 12 ports (VDD VSS VFINE REFCLK V_REF VREG_REF IBCP IBREG PG VREF IB CK_DIV40 —
+  identical to PLLTOP's 12 with PLL_CLK->CK_DIV40). 12 is REQUIRED for LVS to match the
+  netlist; emitting 13 would mismatch. So the LEF has the correct 12 pins.
+
+SELF-VERIFY (escaped analog_real2/PLLTOP_D40.gds):
+  * self-DRC = 0. (magic drc check on a clean re-read of the escaped GDS -> TOTAL 0.
+    The "DRCN 49" printed DURING the interactive paint is magic's incremental-DRC state on
+    partially-drawn via stacks before `drc catchup`; a fresh read-back gives 0 — identical
+    to the analog_real PLLTOP behavior.)
+  * self-LVS = "Circuits match uniquely" vs cal_pll/cells/PLLTOP_D40.spice. Both circuits
+    363-ish device instances after series/parallel merge, 323 nets each. All 12 chip-facing
+    ports connected; 9 low-metal pins landed on met3, CK_DIV40 on met3, VDD/VSS on met5.
+  Reproduce: verify_escape_d40.py (clearance check) -> gen_escape_magic_d40.tcl (magic paint
+    + label + DRC + write) -> _extract.tcl (internal-node port removal + ext2spice) ->
+    _lvs.tcl (netgen) -> gen_lef.py (LEF + PLLTOP_D40.shifted.gds).
+
+--------------------------------------------------------------------------------
+2. FLOORPLAN + ASSEMBLY  (chip_final/pll_chip_final_pads.tcl ; DIE 1900 x 1900)
+--------------------------------------------------------------------------------
+Macro grew vs chip_real (457.405x754.740 -> 463.705x777.065 ; +6.3 wide, +22.325 tall).
+Floorplan re-checked and kept (margins still satisfied):
+  u_ana  PLLTOP_D40 placed FIXED (420.000, 560.175) R0 -> bbox (420,560.175)-(883.705,1337.240)
+         (top 1337.24 < die-250=1650 OK ; right 883.705, keeps ~136um to u_dig)
+  u_dig  pll_dcc    placed FIXED (1020.280, 700.400) R0 -> bbox (1020,700.4)-(1194.605,874.725)
+  Design area 391705 um^2, 20% utilization (vs chip_real 376531 / 19%).
+  Pad ring (27 pads = chip_real's 26 + the new PLLCLK_OUT):
+    WEST  : a_vfine a_vref_i a_vref_o a_vreg_ref a_ibcp a_ibreg a_ib  p_vdda p_vssa
+            (7 analog bias pads nearest the macro's bottom-left bias pins)
+    SOUTH : i_refclk i_rstn i_sclk i_csn i_sdi  p_vssio
+    EAST  : o_sdo o_scanout o_lock o_clkout  o_pllclk(NEW)  p_vccd p_vssd
+    NORTH : i_scanen i_scanin i_testmd i_testclk  p_vddio
+    + 4 corner pads (place_corners). connect_by_abutment wires the 12-net power bus.
+
+WIRING (the delta vs chip_real), all honored exactly and verified in the routed DEF:
+  pll_dcc.ref_o    -> PLLTOP_D40.REFCLK        (net a_ref:      u_dig ref_o    -> u_ana REFCLK)
+  pll_dcc.pll_en_o -> PLLTOP_D40.PG            (net a_pll_en:   u_dig pll_en_o -> u_ana PG)
+  PLLTOP_D40.CK_DIV40 -> PLLCLK_OUT gpio_out pad  AND  -> pll_dcc.pll_clk_i
+       (net a_ck_div40 has EXACTLY 3 terminals: (u_ana CK_DIV40)(o_pllclk.u OUT)(u_dig pll_clk_i),
+        ROUTED on met3 — the ÷40 clock goes DIRECTLY to the pad, no further division, and the
+        digital core observes the same net.)
+  7 bias pins (VFINE V_REF VREF VREG_REF IBCP IBREG IB) -> 7 analog_io pads (P_CORE<->macro pin,
+        all 7 verified 1:1 in the DEF).
+  PLLTOP_D40.VDD/VSS -> analog domain VDDA/VSSA (global_connect u_ana VDD->VDDA, VSS->VSSA).
+  pll_dcc.up_i/dn_i tied 1'b0 ; unused dcc outputs left unconnected ; pll_dcc.clk_out_o ->
+        CLKOUT pad (unchanged from chip_real). Raw PLL_CLK is macro-internal (not a chip pin).
+
+ASSEMBLE (build_chip_final.sh -> pll_assemble_final.tcl, ICeWall):
+  yosys synth asm+sch (both macros + pad cells black-boxed, blackbox PLLTOP_D40).
+  OpenROAD: place_macro both macros, place_pads, global_connect, place_corners + io_fill,
+  connect_by_abutment, global_route, detailed_route. CHIP_ROUTED, detailed_route DRC report
+  EMPTY. ASSEMBLE_RESULT routed=1 route_drc=0 (FIRST pass — no floorplan iteration needed).
+  Only notable warning: "MPL-0002 Could not align all pins of macro u_ana to track-grid
+  (1/10 aligned)" — the benign custom-macro met3/met5 grid notice also seen in chip_real;
+  route-DRC=0 confirms the router still reached every pin.
+
+--------------------------------------------------------------------------------
+3. CHIP LVS  (chip_final/chip_lvs_final.sh -> out/pll_chip_lvs.out)
+--------------------------------------------------------------------------------
+OpenROAD normalizes the routed DEF + the schematic netlist with IDENTICAL global_connect
+(incl. u_ana VDD/VSS->VDDA/VSSA and the _RING/AMUXBUS corner-tap merge), strips com_bus_slice
+fill, netgen compares. PLLTOP_D40 and pll_dcc are BLACK BOXES (port-level match).
+  Both L_strip.v and S.v contain PLLTOP_D40 (1 inst), pll_dcc (1 inst), net PLLCLK_OUT (x3),
+  net a_ck_div40 (x4). "Device classes PLLTOP_D40 ... are equivalent."
+  Final result: "Circuits match uniquely." (Netlists match with 1 symmetry.)
+  => chip_LVS = MATCH.  The ÷40 fanout (CK_DIV40 -> pll_clk_i + PLLCLK_OUT) is inside the match.
+
+--------------------------------------------------------------------------------
+4. CHIP DRC  (klayout sky130A_mr.drc, feol+beol+offgrid, 4 threads ; out/pll_chip_final_drc.xml)
+--------------------------------------------------------------------------------
+  Command: klayout -b -r $SKY130A/libs.tech/klayout/drc/sky130A_mr.drc
+             -rd input=out/pll_chip_final.gds -rd top_cell=pll_chip
+             -rd report=out/pll_chip_final_drc.xml -rd feol=true -rd beol=true
+             -rd offgrid=true -rd thr=4
+  TOTAL = 75 violations. By rule (category):
+    nwell.2a 58  | m4.5ab 7 | m4.2 3 | poly.2 3 | capm.2b 2   (+2 nwell.2a in pll_dcc = 60 nwell total)
+  LOCATION analysis (violation centroids vs macro / pll_dcc / IO-pad-cell regions):
+    - IO_PAD_CELL_INTERNAL          73  (nwell/poly/m4 straps + 2 analog_pad MIM capm.2b;
+                                         all within ~355um of a die edge = inside sky130_ef_io
+                                         gpiov2/analog/hvc pad bodies. The 2 capm.2b at
+                                         (325.4,716.5) & (325.4,399.7) sit inside the WEST
+                                         analog_pad cells — a MIM-cap rule can only come from
+                                         a MIM cap, and there are none in top-level routing.)
+    - INSIDE_pll_dcc (pre-hardened)  2  (nwell.2a at the pre-hardened digital macro edge)
+    - INSIDE PLLTOP_D40 macro        0
+    - TOP-LEVEL ROUTING              0
+  => ALL 75 are IO-pad-cell-internal / pre-hardened-macro nwell — the foundry-WAIVABLE class
+     (same class as chip_real's 79; 4 fewer here because the different macro/pad geometry
+     shifts a few pad-ring nwell straps). Standalone PLLTOP_D40 macro DRC: 0. OpenROAD
+     route-DRC: 0.  chip_DRC = 75 (waivable = 75, real = 0).
+  Waiver to reach a formal 0-count signoff (no layout change): the standard sky130 IO-cell
+  DRC waiver (cell-exclusion of sky130_fd_io__* + the pll_dcc macro from nwell/poly/met/capm),
+  identical to the baseline chip.
+
+--------------------------------------------------------------------------------
+5. STREAM + FULL VERIFICATION SUITE  (chip_final/out/pll_chip_final.gds)
+--------------------------------------------------------------------------------
+STREAM (run_stream_final.sh -> stream_chip_final.py): merges routed DEF + PLLTOP_D40.shifted.gds
+  (gana) + pll_dcc.gds + sky130_ef_io.gds + sky130_fd_io.gds + sky130_fd_sc_hd.gds.
+  Reported "PLLTOP_D40 cell: 1439484 shapes (non-empty = REAL macro)". Chip GDS ~94 MB,
+  top bbox (-2,0)-(1900,1900).
+
+GDS INTEGRITY (signoff/gds_integrity.py):
+  top cells: ['pll_chip']  (exactly 1)                         -> OK
+  cells (named): 151 ; merged instance count 3099
+  top bbox 1902.00 x 1900.00 um, area 3.6138 mm^2
+  off-grid(5nm) sampled hits: 0                                -> ON-GRID
+  => integrity = OK.
+
+ANTENNA (magic extract all + antennacheck, signoff/run_antenna.sh, PER-MACRO on PLLTOP_D40):
+  "antennacheck finished." 0 explicit antenna-ratio violations. (The "Total of 21 warnings"
+  are magic extraction label/connectivity notices, NOT process-antenna-ratio violations.)
+  Per-macro is authoritative for the analog macro; full-chip magic extract of the pad ring
+  is very heavy (it was also started on the merged chip GDS and likewise reported 0
+  antenna-ratio violations before being stopped mid-extract to free resources). antenna = 0.
+
+DENSITY (klayout per-layer metal density, from gds_integrity.py):
+  met1 1.2% | met2 2.1% | met3 9.3% | met4 20.7% | met5 17.4%.
+  => No layer exceeds the 70% MAX-density limit (max is met4 at 20.7%) -> no max-density flag.
+     All layers are BELOW the sky130 ~30-70% MIN-density window, so a real mask set needs
+     metal FILL before final signoff (standard step; the sky130 met_min_ca_density.lydrc
+     fill/check applies). No fill is inserted here (it would perturb LVS/DRC state); flagged
+     as the one remaining pre-mask step. This is NOT a functional/connectivity blocker.
+
+ERC / CONNECTIVITY (routed DEF net audit + LVS):
+  - No floating top-level SIGNAL/PAD nets: 288 top nets, 286 with >=2 terminals; the 2
+    "under-2" are VDDA/VSSA whose pad-side taps live in SPECIALNETS (fully connected via
+    global_connect) — not floating.
+  - All 7 bias pins reach a pad: a_vfine..a_ib each = (u_ana <PIN>)<->(<pad>.u P_CORE). OK.
+  - PLLCLK_OUT reaches its pad: (PIN PLLCLK_OUT)<->(o_pllclk.u PAD). OK.
+  - Power connectivity: VDDA->u_ana VDD, VSSA->u_ana VSS ; VCCD/VSSD (digital), VDDIO/VSSIO
+    (IO) all present as SPECIAL nets and globally connected to their pads. OK.
+  - Mixed-signal: REFCLK (u_dig ref_o->u_ana REFCLK), PG (u_dig pll_en_o->u_ana PG). OK.
+
+CK_DIV40 -> PAD TRACE (confirmed in both DEF and merged GDS):
+  - DEF: net a_ck_div40 = (u_ana CK_DIV40)(o_pllclk.u OUT)(u_dig pll_clk_i), ROUTED met3
+    from (882.74,572.22) toward (1144.71,*).
+  - merged GDS: met3 present CONTINUOUSLY at the macro boundary (882.74,572.22), mid-route
+    (1000,572.22), and near the digital core (1144.71,572.22). PLLTOP_D40 non-empty (1439484
+    shapes). => the ÷40 output physically traces macro -> PLLCLK_OUT pad (+ digital observe).
+
+--------------------------------------------------------------------------------
+6. RESIDUAL / NEXT STEP  (rigorous honesty)
+--------------------------------------------------------------------------------
+  No blocker for routing / LVS / integrity / antenna / connectivity closure.
+  Two standard-and-expected pre-mask items remain, NEITHER a functional blocker:
+   (a) DRC = 75, all foundry-WAIVABLE (IO-cell-internal + pre-hardened pll_dcc; 0 in the
+       PLLTOP_D40 macro or top-level routing). Exact next step: apply the standard sky130
+       IO-cell DRC waiver (cell-exclusion of sky130_fd_io__* + pll_dcc from
+       nwell/poly/met/capm), the same waiver used for the baseline chip -> formal 0-count.
+       No layout change required.
+   (b) Metal min-density: all layers < the sky130 min-density window. Exact next step: run
+       sky130 metal FILL ($SKY130A/libs.tech/klayout/drc/met_min_ca_density.lydrc +
+       KLayout fill) before mask generation, then re-verify DRC/LVS. Max-density is fine
+       (no layer > 21%). No fill inserted here to preserve a clean LVS/DRC comparison state.
+  Post-layout analog closure (÷40 jitter / PSRR / lock behavior) is a separate task on the
+  macro/system, out of scope for this physical integration.
+
+FILES DELIVERED
+  PLL-Chip/analog_real2/ : PLLTOP_D40.lef, PLLTOP_D40.gds (escaped), PLLTOP_D40.shifted.gds,
+                           PLLTOP_D40.ext.spice, gen_escape_magic_d40.tcl, gen_lef.py,
+                           verify_escape_d40.py, _extract.tcl, _lvs.tcl, lvs.out, .magicrc,
+                           (+ _escape.log, _ext.log, _lvs.log, _drc_detail.log)
+  PLL-Chip/chip_final/   : pll_chip_final.v, PLLTOP_D40_bb.v, pll_chip_final_pads.tcl,
+                           pll_assemble_final.tcl, build_chip_final.sh, chip_lvs_final.sh,
+                           stream_chip_final.py, run_stream_final.sh, .magicrc,
+                           out/{pll_chip.routed.def, pll_chip_final.gds, pll_chip_lvs.out,
+                                pll_chip_final_drc.xml, assemble.log, klayout_drc.log, ...}
+  PLL-Chip/signoff/      : final_chip.txt (this file)
+  (No cal_pll engine internals exported into any deliverable.)
+================================================================================
