@@ -1,8 +1,8 @@
 ![Ring-Oscillator PLL — AI-driven paper-to-chip](doc_images/pll_chip_banner.png)
 
-# Paper‑to‑Chip: an Open‑Source sky130 Ring‑Oscillator PLL
+# AI-driven Paper‑to‑Chip: an Open‑Source sky130 Ring‑Oscillator PLL
 
-> **AI‑driven paper‑to‑chip.** From the paper (Williams *et al.*, IEEE CICC 2004) to a tapeout‑ready
+> **AI‑driven Paper‑to‑Chip.** From the paper (Williams *et al.*, IEEE CICC 2004) to a tapeout‑ready
 > sky130 mixed‑signal chip — the RTL, the analog PLL macro, chip integration, and signoff were produced
 > by an AI design agent.
 
