@@ -7,3 +7,6 @@ Behavioral models of the PLL top cell — drop-in, same interface:
 - `tb_pll_top.sv` — self-checking testbench (lock 270 MHz, ÷M=10, jitter).
 
 Run: `./run_models.sh` (iverilog + Verilator) → ALL_PASS.
+
+## License
+MIT (see the repository `LICENSE`).

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
 #============================================================================
 # run_models.sh -- compile + run all three PLL top-cell models under Icarus
 # Verilog and print each model's ALL_PASS / per-check result.

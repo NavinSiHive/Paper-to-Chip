@@ -31,3 +31,6 @@ Verdict: **TAPEOUT-READY** (modulo two standard pre-mask steps, noted below).
 ## Layout-engine isolation
 No CAL analog-layout-engine internals appear in any deliverable — the analog PLL is delivered only as a
 verified **hard macro** (GDS/LEF/CDL). Enforced by the GitHub-kit `.gitignore` + a staged-file guard.
+
+---
+**License:** MIT — see the `LICENSE` file. Generated GDS, models, and docs provided as-is, without warranty.

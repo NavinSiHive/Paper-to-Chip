@@ -69,3 +69,6 @@ driver (out of scope for open sky130).
 | Chip (hierarchical) | assembled, route-DRC 0, chip-LVS match (see reports/) |
 | GDS integrity | single top cell · on-grid · density within limits |
 | SV + RNM models | REFCLK→PLL_CLK lock + ÷M verified (see models/) |
+
+---
+**License:** MIT — see the `LICENSE` file. Generated GDS, models, and docs provided as-is, without warranty.

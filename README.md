@@ -63,4 +63,4 @@ repository ships the **generated artifacts** (GDS, models, docs) only. The analo
 verified hard macro.
 
 ## License
-Apache‑2.0 (see [LICENSE](LICENSE)). Generated GDS and models are provided as‑is, without warranty.
+**MIT** (see [LICENSE](LICENSE)). Generated GDS, models, and docs are provided as‑is, without warranty.
