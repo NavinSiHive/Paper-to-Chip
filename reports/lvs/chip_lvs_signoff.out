@@ -1,0 +1,389 @@
+
+Circuit 1 cell sky130_ef_io__corner_pad and Circuit 2 cell sky130_ef_io__corner_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__corner_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__corner_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__corner_pad        |Circuit 2: sky130_ef_io__corner_pad        
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__corner_pad and sky130_ef_io__corner_pad are equivalent.
+
+Circuit 1 cell sky130_fd_sc_hd__conb_1 and Circuit 2 cell sky130_fd_sc_hd__conb_1 are black boxes.
+Warning: Equate pins:  cell sky130_fd_sc_hd__conb_1 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_fd_sc_hd__conb_1 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_fd_sc_hd__conb_1         |Circuit 2: sky130_fd_sc_hd__conb_1         
+-------------------------------------------|-------------------------------------------
+VGND                                       |VGND                                       
+VPWR                                       |VPWR                                       
+HI                                         |HI                                         
+LO                                         |LO                                         
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_fd_sc_hd__conb_1 and sky130_fd_sc_hd__conb_1 are equivalent.
+
+Circuit 1 cell sky130_ef_io__analog_pad and Circuit 2 cell sky130_ef_io__analog_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__analog_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__analog_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__analog_pad        |Circuit 2: sky130_ef_io__analog_pad        
+-------------------------------------------|-------------------------------------------
+P_CORE                                     |P_CORE                                     
+VSSA                                       |VSSA                                       
+VSSD                                       |VSSD                                       
+AMUXBUS_B                                  |AMUXBUS_B                                  
+AMUXBUS_A                                  |AMUXBUS_A                                  
+VDDIO_Q                                    |VDDIO_Q                                    
+VDDIO                                      |VDDIO                                      
+VSWITCH                                    |VSWITCH                                    
+VSSIO                                      |VSSIO                                      
+VDDA                                       |VDDA                                       
+VCCD                                       |VCCD                                       
+VCCHIB                                     |VCCHIB                                     
+VSSIO_Q                                    |VSSIO_Q                                    
+P_PAD                                      |P_PAD                                      
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__analog_pad and sky130_ef_io__analog_pad are equivalent.
+
+Circuit 1 cell sky130_ef_io__gpiov2_pad_wrapped and Circuit 2 cell sky130_ef_io__gpiov2_pad_wrapped are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__gpiov2_pad_wrapped is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__gpiov2_pad_wrapped is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__gpiov2_pad_wrappe |Circuit 2: sky130_ef_io__gpiov2_pad_wrappe 
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+ANALOG_EN                                  |ANALOG_EN                                  
+ANALOG_POL                                 |ANALOG_POL                                 
+ANALOG_SEL                                 |ANALOG_SEL                                 
+ENABLE_H                                   |ENABLE_H                                   
+ENABLE_INP_H                               |ENABLE_INP_H                               
+ENABLE_VDDA_H                              |ENABLE_VDDA_H                              
+ENABLE_VDDIO                               |ENABLE_VDDIO                               
+ENABLE_VSWITCH_H                           |ENABLE_VSWITCH_H                           
+HLD_H_N                                    |HLD_H_N                                    
+HLD_OVR                                    |HLD_OVR                                    
+IB_MODE_SEL                                |IB_MODE_SEL                                
+IN                                         |IN                                         
+INP_DIS                                    |INP_DIS                                    
+OE_N                                       |OE_N                                       
+OUT                                        |OUT                                        
+PAD                                        |PAD                                        
+SLOW                                       |SLOW                                       
+VCCD                                       |VCCD                                       
+VCCHIB                                     |VCCHIB                                     
+VDDA                                       |VDDA                                       
+VDDIO                                      |VDDIO                                      
+VDDIO_Q                                    |VDDIO_Q                                    
+VSSA                                       |VSSA                                       
+VSSD                                       |VSSD                                       
+VSSIO                                      |VSSIO                                      
+VSSIO_Q                                    |VSSIO_Q                                    
+VSWITCH                                    |VSWITCH                                    
+VTRIP_SEL                                  |VTRIP_SEL                                  
+DM[2]                                      |DM[2]                                      
+DM[1]                                      |DM[1]                                      
+DM[0]                                      |DM[0]                                      
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__gpiov2_pad_wrapped and sky130_ef_io__gpiov2_pad_wrapped are equivalent.
+
+Circuit 1 cell sky130_ef_io__vccd_hvc_pad and Circuit 2 cell sky130_ef_io__vccd_hvc_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__vccd_hvc_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__vccd_hvc_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__vccd_hvc_pad      |Circuit 2: sky130_ef_io__vccd_hvc_pad      
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VCCD_PAD                                   |VCCD_PAD                                   
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__vccd_hvc_pad and sky130_ef_io__vccd_hvc_pad are equivalent.
+
+Circuit 1 cell sky130_ef_io__vdda_hvc_pad and Circuit 2 cell sky130_ef_io__vdda_hvc_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__vdda_hvc_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__vdda_hvc_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__vdda_hvc_pad      |Circuit 2: sky130_ef_io__vdda_hvc_pad      
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VDDA_PAD                                   |VDDA_PAD                                   
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__vdda_hvc_pad and sky130_ef_io__vdda_hvc_pad are equivalent.
+
+Circuit 1 cell sky130_ef_io__vddio_hvc_pad and Circuit 2 cell sky130_ef_io__vddio_hvc_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__vddio_hvc_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__vddio_hvc_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__vddio_hvc_pad     |Circuit 2: sky130_ef_io__vddio_hvc_pad     
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VDDIO_PAD                                  |VDDIO_PAD                                  
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__vddio_hvc_pad and sky130_ef_io__vddio_hvc_pad are equivalent.
+
+Circuit 1 cell sky130_ef_io__vssa_hvc_pad and Circuit 2 cell sky130_ef_io__vssa_hvc_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__vssa_hvc_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__vssa_hvc_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__vssa_hvc_pad      |Circuit 2: sky130_ef_io__vssa_hvc_pad      
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VSSA_PAD                                   |VSSA_PAD                                   
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__vssa_hvc_pad and sky130_ef_io__vssa_hvc_pad are equivalent.
+
+Circuit 1 cell sky130_ef_io__vssd_hvc_pad and Circuit 2 cell sky130_ef_io__vssd_hvc_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__vssd_hvc_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__vssd_hvc_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__vssd_hvc_pad      |Circuit 2: sky130_ef_io__vssd_hvc_pad      
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VSSD_PAD                                   |VSSD_PAD                                   
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__vssd_hvc_pad and sky130_ef_io__vssd_hvc_pad are equivalent.
+
+Circuit 1 cell sky130_ef_io__vssio_hvc_pad and Circuit 2 cell sky130_ef_io__vssio_hvc_pad are black boxes.
+Warning: Equate pins:  cell sky130_ef_io__vssio_hvc_pad is a placeholder, treated as a black box.
+Warning: Equate pins:  cell sky130_ef_io__vssio_hvc_pad is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: sky130_ef_io__vssio_hvc_pad     |Circuit 2: sky130_ef_io__vssio_hvc_pad     
+-------------------------------------------|-------------------------------------------
+AMUXBUS_A                                  |AMUXBUS_A                                  
+AMUXBUS_B                                  |AMUXBUS_B                                  
+VSSIO_PAD                                  |VSSIO_PAD                                  
+VSSA                                       |VSSA                                       
+VDDA                                       |VDDA                                       
+VSWITCH                                    |VSWITCH                                    
+VDDIO_Q                                    |VDDIO_Q                                    
+VCCHIB                                     |VCCHIB                                     
+VDDIO                                      |VDDIO                                      
+VCCD                                       |VCCD                                       
+VSSIO                                      |VSSIO                                      
+VSSD                                       |VSSD                                       
+VSSIO_Q                                    |VSSIO_Q                                    
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes sky130_ef_io__vssio_hvc_pad and sky130_ef_io__vssio_hvc_pad are equivalent.
+
+Circuit 1 cell PLLTOP_D40 and Circuit 2 cell PLLTOP_D40 are black boxes.
+Warning: Equate pins:  cell PLLTOP_D40 is a placeholder, treated as a black box.
+Warning: Equate pins:  cell PLLTOP_D40 is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: PLLTOP_D40                      |Circuit 2: PLLTOP_D40                      
+-------------------------------------------|-------------------------------------------
+REFCLK                                     |REFCLK                                     
+PG                                         |PG                                         
+VFINE                                      |VFINE                                      
+V_REF                                      |V_REF                                      
+VREF                                       |VREF                                       
+VREG_REF                                   |VREG_REF                                   
+IBCP                                       |IBCP                                       
+IBREG                                      |IBREG                                      
+IB                                         |IB                                         
+CK_DIV40                                   |CK_DIV40                                   
+VDD                                        |VDD                                        
+VSS                                        |VSS                                        
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes PLLTOP_D40 and PLLTOP_D40 are equivalent.
+
+Circuit 1 cell pll_dcc and Circuit 2 cell pll_dcc are black boxes.
+Warning: Equate pins:  cell pll_dcc is a placeholder, treated as a black box.
+Warning: Equate pins:  cell pll_dcc is a placeholder, treated as a black box.
+
+Subcircuit pins:
+Circuit 1: pll_dcc                         |Circuit 2: pll_dcc                         
+-------------------------------------------|-------------------------------------------
+clk_out_o                                  |clk_out_o                                  
+dn_i                                       |dn_i                                       
+lock_o                                     |lock_o                                     
+pll_clk_i                                  |pll_clk_i                                  
+pll_en_o                                   |pll_en_o                                   
+ref_o                                      |ref_o                                      
+refclk_i                                   |refclk_i                                   
+rst_n_i                                    |rst_n_i                                    
+scan_en_i                                  |scan_en_i                                  
+scan_in_i                                  |scan_in_i                                  
+scan_out_o                                 |scan_out_o                                 
+spi_cs_n_i                                 |spi_cs_n_i                                 
+spi_sclk_i                                 |spi_sclk_i                                 
+spi_sdi_i                                  |spi_sdi_i                                  
+spi_sdo_o                                  |spi_sdo_o                                  
+test_clk_i                                 |test_clk_i                                 
+test_mode_i                                |test_mode_i                                
+up_i                                       |up_i                                       
+VDD                                        |VDD                                        
+VSS                                        |VSS                                        
+cp_iset_o[7]                               |cp_iset_o[7]                               
+cp_iset_o[6]                               |cp_iset_o[6]                               
+cp_iset_o[5]                               |cp_iset_o[5]                               
+cp_iset_o[4]                               |cp_iset_o[4]                               
+cp_iset_o[3]                               |cp_iset_o[3]                               
+cp_iset_o[2]                               |cp_iset_o[2]                               
+cp_iset_o[1]                               |cp_iset_o[1]                               
+cp_iset_o[0]                               |cp_iset_o[0]                               
+m_div_o[7]                                 |m_div_o[7]                                 
+m_div_o[6]                                 |m_div_o[6]                                 
+m_div_o[5]                                 |m_div_o[5]                                 
+m_div_o[4]                                 |m_div_o[4]                                 
+m_div_o[3]                                 |m_div_o[3]                                 
+m_div_o[2]                                 |m_div_o[2]                                 
+m_div_o[1]                                 |m_div_o[1]                                 
+m_div_o[0]                                 |m_div_o[0]                                 
+vco_band_o[7]                              |vco_band_o[7]                              
+vco_band_o[6]                              |vco_band_o[6]                              
+vco_band_o[5]                              |vco_band_o[5]                              
+vco_band_o[4]                              |vco_band_o[4]                              
+vco_band_o[3]                              |vco_band_o[3]                              
+vco_band_o[2]                              |vco_band_o[2]                              
+vco_band_o[1]                              |vco_band_o[1]                              
+vco_band_o[0]                              |vco_band_o[0]                              
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes pll_dcc and pll_dcc are equivalent.
+
+Subcircuit summary:
+Circuit 1: pll_chip                        |Circuit 2: pll_chip                        
+-------------------------------------------|-------------------------------------------
+sky130_ef_io__corner_pad (4)               |sky130_ef_io__corner_pad (4)               
+sky130_fd_sc_hd__conb_1 (263)              |sky130_fd_sc_hd__conb_1 (263)              
+sky130_ef_io__analog_pad (7)               |sky130_ef_io__analog_pad (7)               
+sky130_ef_io__gpiov2_pad_wrapped (14)      |sky130_ef_io__gpiov2_pad_wrapped (14)      
+sky130_ef_io__vccd_hvc_pad (1)             |sky130_ef_io__vccd_hvc_pad (1)             
+sky130_ef_io__vdda_hvc_pad (1)             |sky130_ef_io__vdda_hvc_pad (1)             
+sky130_ef_io__vddio_hvc_pad (1)            |sky130_ef_io__vddio_hvc_pad (1)            
+sky130_ef_io__vssa_hvc_pad (1)             |sky130_ef_io__vssa_hvc_pad (1)             
+sky130_ef_io__vssd_hvc_pad (1)             |sky130_ef_io__vssd_hvc_pad (1)             
+sky130_ef_io__vssio_hvc_pad (1)            |sky130_ef_io__vssio_hvc_pad (1)            
+PLLTOP_D40 (1)                             |PLLTOP_D40 (1)                             
+pll_dcc (1)                                |pll_dcc (1)                                
+Number of devices: 296                     |Number of devices: 296                     
+Number of nets: 616                        |Number of nets: 616                        
+---------------------------------------------------------------------------------------
+Resolving symmetries by property value.
+Resolving symmetries by pin name.
+Resolving symmetries by net name.
+Netlists match with 1 symmetry.
+
+Subcircuit pins:
+Circuit 1: pll_chip                        |Circuit 2: pll_chip                        
+-------------------------------------------|-------------------------------------------
+P_VREG_REF                                 |P_VREG_REF                                 
+P_VREF_O                                   |P_VREF_O                                   
+P_VREF_I                                   |P_VREF_I                                   
+P_VFINE                                    |P_VFINE                                    
+P_IBREG                                    |P_IBREG                                    
+P_IBCP                                     |P_IBCP                                     
+P_IB                                       |P_IB                                       
+TESTMODE                                   |TESTMODE                                   
+TESTCLK                                    |TESTCLK                                    
+SDI                                        |SDI                                        
+SCLK                                       |SCLK                                       
+SCANIN                                     |SCANIN                                     
+SCANEN                                     |SCANEN                                     
+RSTN                                       |RSTN                                       
+REFCLK                                     |REFCLK                                     
+CSN                                        |CSN                                        
+PLLCLK_OUT                                 |PLLCLK_OUT                                 
+SDO                                        |SDO                                        
+SCANOUT                                    |SCANOUT                                    
+LOCK                                       |LOCK                                       
+CLKOUT                                     |CLKOUT                                     
+VDD_CORE                                   |VDD_CORE                                   
+VDD_ANA                                    |VDD_ANA                                    
+VDD_IO                                     |VDD_IO                                     
+VSS_ANA                                    |VSS_ANA                                    
+VSS_CORE                                   |VSS_CORE                                   
+VSS_IO                                     |VSS_IO                                     
+---------------------------------------------------------------------------------------
+Cell pin lists are equivalent.
+Device classes pll_chip and pll_chip are equivalent.
+
+Final result: Circuits match uniquely.
+.
