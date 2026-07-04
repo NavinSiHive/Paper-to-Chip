@@ -1,85 +1,11 @@
-  PASS: S1 lock @ CK_DIV40=REF/4
-  PASS: S2 no-lock @ CK_DIV40=REF/3 (too fast)
-  PASS: S3 no-lock @ CK_DIV40=REF/6 (too slow)
-  PASS: S4a re-acquire lock
-  PASS: S4b lock lost + sticky on drift
-  PASS: S5 lock_lost cleared
-  PASS: S6 re-lock after clear
-  PASS: S7 lock at 2x abs freq (ratio-invariant)
-  PASS: S8 locked drops on lock_en=0
-  PASS: S11 stays locked under in-band jitter (hysteresis, no chatter)
-  PASS: S11b unlocks on large perturbation
-  PASS: S9 production-params (WIN=256) lock @ REF/4
-  PASS: S10 production-params reject @ REF/3
+  RESULT: ALL_PASS
+== dcc_full: PASS ==
 === RESULT: 13 passed, 0 failed ===
 ALL_PASS
 == ld_clean: PASS ==
-  PASS: E1a locked before reset
-  PASS: E1b reset mid-lock clears locked+sticky
-  PASS: E2 stuck-low CK_DIV40 never locks
-  PASS: E2b stuck-high CK_DIV40 never locks
-  PASS: E3 CK_DIV40=REF (over-count) no lock
-  PASS: E3b CK_DIV40=REF/2 no lock
-  PASS: E4 K=0 locks
-  PASS: E5a locked
-  PASS: E5b single bad window does NOT drop lock (hysteresis)
-  PASS: E5c sustained bad drops lock
-  PASS: E6a clear while bad drops sticky
-  PASS: E6b stays clear while unlocked (never re-locked)
-  PASS: E7 enable glitching leaves unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: wrong-freq -> unlocked
-  PASS: E8 rand: correct-freq -> locked
-  PASS: E8 rand: wrong-freq -> unlocked
 === RESULT: 53 passed, 0 failed ===
 ALL_PASS
 == ld_stress: PASS ==
-  PASS: SPI ID reads 0xA5 (after CS-init)
-  PASS: power-up FSM asserted pll_en
-  PASS: LOCK pad HIGH at CK_DIV40=REF/4
-  PASS: SPI STATUS: locked=1 lock_lost=0
-  PASS: LOCK pad LOW after frequency drift
-  PASS: SPI STATUS: locked=0 lock_lost=1 (sticky)
-  PASS: SPI W1C cleared lock_lost
-  PASS: LOCK pad HIGH again after re-lock
-  PASS: SPI STATUS: locked=1 on re-lock
-  PASS: LOCK pad LOW after pll_en=0
 === RESULT: 10 passed, 0 failed ===
 ALL_PASS
 == dcc_lock: PASS ==

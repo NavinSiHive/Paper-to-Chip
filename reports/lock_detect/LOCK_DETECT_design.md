@@ -1,9 +1,11 @@
 # PLL Lock Detect — design, interface, and verification
 
-Digital lock detection for the PLL chip, built to work with **what the analog `PLLTOP_D40` already
-exposes** — no analog change. Status: **RTL + regression complete (3 suites, 76 checks, all pass),
-chip-level LOCK-pad + SPI path verified; integration into `pll_dcc` is prepared (`pll_dcc_freqlock.v`)
-but HELD** until the parallel PLLTOP work is finalized.
+Digital lock detection for the PLL chip, working with **what the analog `PLLTOP4_D40` exposes** —
+`CK_DIV40` + `REFCLK`, no analog change. Status: **INTEGRATED into the canonical `pll_dcc` and
+regression-clean (4 suites, 101 checks, all pass)**, chip-level LOCK-pad + SPI path verified, SPI
+cold-start fix applied. Physical target delivered: **`PLLTOP4_D40`** (5 ports `VDD VSS REFCLK PLL_CLK
+CK_DIV40`, DRC 0 / LVS match, die 548×941 µm, `CK_DIV40` met3 east). Remaining: RTL re-harden of the
+digital macro + chip re-assembly against `PLLTOP4_D40` (physical; the RTL is final).
 
 ## 1. What the detector needs from analog PLLTOP
 | Approach | Needs from PLLTOP | Available today? |
@@ -55,7 +57,9 @@ already exists in the chip and is correct — only the detection logic changed.)
 3. No pad, CSR, or chip-netlist change needed (`lock_o`/`LOCK`/status already present).
 
 ## 5. Verification — doable and regression-clean
-**Functional regression — DONE, 3 suites / 76 checks all pass** (`signoff/run_lock_regress.sh`, iverilog):
+**Functional regression — DONE, 4 suites / 101 checks all pass** (`signoff/run_lock_regress.sh`, iverilog).
+The 4th suite `dcc_full` re-runs the full 25-check digital-core TB (SPI/reset/lock/divider/bypass) against
+the **integrated** `pll_dcc` (lock tests converted to the CK_DIV40 frequency mechanism) — ALL_PASS. Plus:
 - **`ld_clean` (13):** lock @ REF/4 · reject too-fast (REF/3) · reject too-slow (REF/6) · lose-lock +
   sticky on drift · clear · re-lock · **frequency-invariance** (2× abs freq) · enable-gating ·
   **randomized in-band jitter soak** (no chatter) · large-perturbation unlock · **production WIN=256**.
