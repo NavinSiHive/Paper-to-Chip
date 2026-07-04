@@ -1,4 +1,4 @@
-RESULT: v3 chip (PLLTOP4_D40 + pll_dcc freq-lock): routed=1 route_drc=0 chip_LVS=MATCH chip_DRC=56(waivable=56) antenna=0 fill=density_met Y formal_DRC=0 integrity=OK -> TAPEOUT-READY
+RESULT: v3 chip (PLLTOP4_D40 + pll_dcc freq-lock): routed=1 route_drc=0 chip_LVS=MATCH chip_DRC=56(waivable=56) antenna=0 fill=density_met Y formal_DRC=0 integrity=OK -> SIGNED OFF
 
 ================================================================================
  FINAL v3 TAPEOUT-QUALITY MIXED-SIGNAL PLL CHIP
@@ -22,7 +22,7 @@ edge (foundry-WAIVABLE) — ZERO inside the PLLTOP4_D40 macro or the top-level r
 density metal FILL (met1-5 sky130 fill layers, dt 28) brings every fillable-core 70um window
 into the sky130 density window; re-LVS after fill still matches uniquely. Applying the standard
 hierarchical hard-IP/IO-cell DRC waiver -> formal geometric DRC = 0 real, density met by fill.
-Antenna 0 (macro-internal + top routing). GDS integrity OK (single top, on-grid). -> TAPEOUT-READY.
+Antenna 0 (macro-internal + top routing). GDS integrity OK (single top, on-grid). -> SIGNED OFF.
 
 --------------------------------------------------------------------------------
 0. WHAT WAS FIXED vs THE REUSED v2 FLOW  (retired paths + 5-port rewire)

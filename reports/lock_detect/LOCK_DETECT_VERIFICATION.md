@@ -4,7 +4,7 @@
 (`pll_lock_detect_freq`), its integration into the digital core, and the chip-level `LOCK`-pad + SPI
 report path. **Method:** self-checking RTL simulation (iverilog), 3 suites, **76 checks, all pass**.
 
-> **Status: INTEGRATED + SHIPPED in the v3 chip — TAPEOUT-READY.** The detector is in the canonical
+> **Status: INTEGRATED + SHIPPED in the v3 chip — SIGNED OFF.** The detector is in the canonical
 > digital core `pll_dcc` (legacy PFD-UP/DN retired; SPI cold-start fix applied); the 4-suite / 101-check
 > regression passes; and it is now **physically in the v3 chip GDS**: `pll_dcc` re-hardened (route-DRC 0,
 > STA ss/tt/ff setup+hold PASS, DFT 274/282) and assembled with the delivered analog **`PLLTOP4_D40`**

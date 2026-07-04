@@ -3,7 +3,7 @@
 Mixed-signal ring-oscillator PLL (Williams CICC2004, sky130). Final chip `pll_chip` =
 `pll_dcc` (digital control core) + analog PLL macro + IO ring.
 
-> **★ CURRENT: v4 chip — TAPEOUT-READY (fully signed off, C2-final).** `pll_dcc` (WIN=64 freq-lock detector + SPI fix,
+> **★ CURRENT: v4 chip — signed off (C2-final).** `pll_dcc` (WIN=64 freq-lock detector + SPI fix,
 > re-hardened: route-DRC 0, STA ss/tt/ff setup+hold PASS, DFT 274/282) + **`PLLTOP4_D40`** (self-biased
 > 5-port analog, DRC 0 / LVS match, 548×941 µm) → **routed, chip-LVS "match uniquely", chip-DRC 55 all
 > foundry-waivable (0 real), antenna 0, metal-filled (windowed density met), formal DRC 0, integrity OK.**
@@ -13,9 +13,9 @@ Mixed-signal ring-oscillator PLL (Williams CICC2004, sky130). Final chip `pll_ch
 
 ## Post-layout PVT signoff — final analog rides
 The final post-layout rides remain **valid and complete** — all three corners lock at **270 MHz**, with
-deterministic jitter **< 5 ps** everywhere:
+period jitter **< 5 ps** everywhere:
 
-| Corner | Lock | Deterministic jitter (ps) |
+| Corner | Lock | Period jitter (ps) |
 |:---:|:---:|:---:|
 | **TT** | 270 MHz | **1.96** |
 | **SS** | 270 MHz | **0.60** |
@@ -24,7 +24,7 @@ deterministic jitter **< 5 ps** everywhere:
 VCO tuning range **100–300 MHz (3:1)** across TT/SS/FF; jitter well under the 4 ps spec at all corners. ✅
 
 The table below is the earlier v2 signoff (analog `PLLTOP_D40`, 12-port), retained for provenance; v3
-supersedes it. v2 verdict was also TAPEOUT-READY.
+supersedes it. v2 verdict was also SIGNED OFF.
 
 ## Verification results
 | # | Check | Result |

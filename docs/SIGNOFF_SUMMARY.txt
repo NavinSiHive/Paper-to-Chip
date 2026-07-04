@@ -1,4 +1,4 @@
-RESULT: FINAL chip (PLLTOP_D40 ÷40->PLLCLK_OUT): routed=1 route_drc=0 chip_LVS=MATCH chip_DRC=75(waivable=75) antenna=0 integrity=OK -> TAPEOUT-READY
+RESULT: FINAL chip (PLLTOP_D40 ÷40->PLLCLK_OUT): routed=1 route_drc=0 chip_LVS=MATCH chip_DRC=75(waivable=75) antenna=0 integrity=OK -> SIGNED OFF
 
 ================================================================================
  FINAL TAPEOUT-QUALITY MIXED-SIGNAL PLL CHIP  (÷40 analog macro variant)
@@ -21,7 +21,7 @@ fanned to pll_dcc.pll_clk_i so the digital core observes it. Chip assembles + ro
 / pre-hardened-pll_dcc nwell/poly/met/capm (foundry-WAIVABLE, the same class as chip_real's
 79) — ZERO inside the PLLTOP_D40 macro, its escape pins, or the top-level routing. Merged
 chip GDS streamed with a NON-EMPTY PLLTOP_D40 cell (1,439,484 shapes). Full verification
-suite (integrity/antenna/density/ERC) all pass. -> TAPEOUT-READY.
+suite (integrity/antenna/density/ERC) all pass. -> SIGNED OFF.
 
 --------------------------------------------------------------------------------
 1. ESCAPE + LEF  (analog_real2/ ; the ÷40 macro)

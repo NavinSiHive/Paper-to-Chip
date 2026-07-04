@@ -2,7 +2,7 @@
 
 # AI-driven Paper‑to‑Chip: an Open‑Source sky130 Ring‑Oscillator PLL
 
-[![SiHive](https://img.shields.io/badge/SiHive-si--hive.com-00b8d4)](https://si-hive.com)
+[![Si-Hive](https://img.shields.io/badge/Si--Hive-si--hive.com-00b8d4)](https://si-hive.com)
 [![Write-up](https://img.shields.io/badge/write--up-paper--to--chip-00b8d4)](https://si-hive.com/paper-to-chip)
 [![PDK](https://img.shields.io/badge/PDK-sky130-8a2be2)](https://github.com/google/skywater-pdk)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
@@ -12,7 +12,7 @@
 We gave agentic AI a single input — a published IEEE PLL paper — and let it drive the
 entire flow to a **clean sky130 mixed-signal chip**: circuit design, analog layout,
 digital hardening (synth / STA / CTS / DFT), chip assembly, and DRC/LVS signoff. The
-analog PLL macro (`PLLTOP4_D40`) **locks at 270 MHz across all corners with deterministic
+analog PLL macro (`PLLTOP4_D40`) **locks at 270 MHz across all corners with period
 jitter under 5 ps**, DRC-clean and LVS-matched.
 
 **→ Read the full write-up: https://si-hive.com/paper-to-chip**
@@ -41,16 +41,14 @@ Built by **[Si-Hive](https://si-hive.com)** — AI-driven mixed-signal chip desi
 - **Behavioral models included**: SystemVerilog (pre‑ and post‑layout) + a Real‑Number Model (RNM).
 
 ## Inside the analog PLL
-A self-biased **dual-control-path ring-oscillator PLL**, annotated. `PLLTOP4` is the PLL core;
-`PLLTOP4_D40` is the delivered hard macro — the same PLL **plus an on-chip ÷40** that divides the
-270 MHz VCO clock down to a pad-safe ≈ 6.75 MHz (`CK_DIV40`), so the fast clock never leaves the analog.
+The delivered analog macro **`PLLTOP4_D40`** — a self-biased **dual-control-path ring-oscillator PLL**
+with an **on-chip ÷40** that divides the 270 MHz VCO clock down to a pad-safe ≈ 6.75 MHz (`CK_DIV40`),
+so the fast clock never leaves the analog.
 
-| `PLLTOP4` — PLL core | `PLLTOP4_D40` — delivered macro (+ ÷40) |
-|:---:|:---:|
-| [![PLLTOP4 core](doc_images/PLLTOP4_layout.png)](doc_images/PLLTOP4_layout.png) | [![PLLTOP4_D40 macro](doc_images/PLLTOP4_D40_layout.png)](doc_images/PLLTOP4_D40_layout.png) |
+[![PLLTOP4_D40 macro](doc_images/PLLTOP4_D40_layout.png)](doc_images/PLLTOP4_D40_layout.png)
 
-*(click to zoom — LEF-accurate port callouts, region highlights, and a block legend: PFD · charge pump ·
-loop filter · gm-C coarse · dual-control ring VCO · ÷M feedback · regulator · bias.)*
+*(click to zoom — the ÷40 divider highlighted, with a block legend: PFD · charge pump · loop filter ·
+gm-C coarse · dual-control ring VCO · ÷M feedback · regulator · bias.)*
 
 ## Specs (nominal)
 | Parameter | Value |
@@ -62,13 +60,13 @@ loop filter · gm-C coarse · dual-control ring VCO · ÷M feedback · regulator
 | Supply / process | 1.8 V / sky130 (0.36 mm² analog, 1.90 × 1.90 mm chip) |
 
 ## Post-layout signoff (all corners)
-| Corner | Lock | Deterministic jitter (ps) |
+| Corner | Lock | Period jitter (ps) |
 |:---:|:---:|:---:|
 | **TT** | 270 MHz | **1.96** |
 | **SS** | 270 MHz | **0.60** |
 | **FF** | 270 MHz | **2.30** |
 
-All three corners lock at 270 MHz with deterministic jitter **< 5 ps**.
+All three corners lock at 270 MHz with period jitter **< 5 ps**.
 
 ### Lock witness — mixed-signal co-simulation
 ![PLL lock witness](doc_images/pll_lock_witness.png)
@@ -106,7 +104,7 @@ repository ships the **generated artifacts** (GDS, models, docs) only. The analo
 verified hard macro.
 
 ## About & links
-Built at **SiHive** — [si-hive.com](https://si-hive.com) · silicon design & EDA automation.
+Built at **Si-Hive** — [si-hive.com](https://si-hive.com) · silicon design & EDA automation.
 
 📖 **Full write-up:** [How this PLL went from paper to GDS with an AI design agent](https://si-hive.com/paper-to-chip)
 — the corner results, the 100–300 MHz range, the lock-witness, and the open-source story.
