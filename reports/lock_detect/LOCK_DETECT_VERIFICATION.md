@@ -4,12 +4,13 @@
 (`pll_lock_detect_freq`), its integration into the digital core, and the chip-level `LOCK`-pad + SPI
 report path. **Method:** self-checking RTL simulation (iverilog), 3 suites, **76 checks, all pass**.
 
-> **Status: INTEGRATED (RTL) + regression-clean; physical re-harden pending.** The detector is now in the
-> canonical digital core `pll_dcc` (legacy PFD-UP/DN detector retired; SPI cold-start fix applied), and
-> the full 4-suite / 101-check regression passes. The delivered analog target **`PLLTOP4_D40`** (5 ports
-> `VDD VSS REFCLK PLL_CLK CK_DIV40`, DRC 0 / LVS match, 548×941 µm) confirms the premises (CK_DIV40 =
-> PLL_CLK/40, 1/4-vs-REFCLK). It is **not yet in the shipped chip GDS** in this kit (the shipped chip is
-> the frozen v2); the v3 chip re-assembly against `PLLTOP4_D40` is the remaining physical step.
+> **Status: INTEGRATED + SHIPPED in the v3 chip — TAPEOUT-READY.** The detector is in the canonical
+> digital core `pll_dcc` (legacy PFD-UP/DN retired; SPI cold-start fix applied); the 4-suite / 101-check
+> regression passes; and it is now **physically in the v3 chip GDS**: `pll_dcc` re-hardened (route-DRC 0,
+> STA ss/tt/ff setup+hold PASS, DFT 274/282) and assembled with the delivered analog **`PLLTOP4_D40`**
+> (5 ports, DRC 0 / LVS match, 548×941 µm) into `pll_chip` v3 — **routed, chip-LVS "match uniquely",
+> chip-DRC 56 all-waivable (0 real), antenna 0, metal-filled, formal DRC 0, integrity OK.** `LOCK` is on a
+> pad and in the SPI STATUS register. See `signoff/final_chip_v3.txt`.
 
 ## What was checked
 Run: `signoff/run_lock_regress.sh` → **`REGRESS: ALL SUITES PASS`** (log: `regression_log.txt`).

@@ -1,8 +1,18 @@
 # PLL Chip — Tapeout Signoff Summary
 
 Mixed-signal ring-oscillator PLL (Williams CICC2004, sky130). Final chip `pll_chip` =
-`pll_dcc` (digital control core) + `PLLTOP_D40` (analog PLL + on-macro ÷40) + IO ring.
-Verdict: **TAPEOUT-READY** (modulo two standard pre-mask steps, noted below).
+`pll_dcc` (digital control core) + analog PLL macro + IO ring.
+
+> **★ CURRENT: v3 chip — TAPEOUT-READY (fully signed off).** `pll_dcc` (freq-lock detector + SPI fix,
+> re-hardened: route-DRC 0, STA ss/tt/ff setup+hold PASS, DFT 274/282) + **`PLLTOP4_D40`** (self-biased
+> 5-port analog, DRC 0 / LVS match, 548×941 µm) → **routed, chip-LVS "match uniquely", chip-DRC 56 all
+> foundry-waivable (0 real), antenna 0, metal-filled (windowed density met), formal DRC 0, integrity OK.**
+> On-chip **LOCK detect** (CK_DIV40 vs REFCLK) reports on the `LOCK` pad + SPI STATUS. See
+> `reports/final_chip_v3.txt` and `reports/lock_detect/`. GDS: `gds/pll_chip_v3.gds` (tapeout kit) /
+> `gds/pll_chip.gds.gz` (public kit).
+
+The table below is the earlier v2 signoff (analog `PLLTOP_D40`, 12-port), retained for provenance; v3
+supersedes it. v2 verdict was also TAPEOUT-READY.
 
 ## Verification results
 | # | Check | Result |
@@ -31,6 +41,3 @@ Verdict: **TAPEOUT-READY** (modulo two standard pre-mask steps, noted below).
 ## Layout-engine isolation
 No CAL analog-layout-engine internals appear in any deliverable — the analog PLL is delivered only as a
 verified **hard macro** (GDS/LEF/CDL). Enforced by the GitHub-kit `.gitignore` + a staged-file guard.
-
----
-**License:** MIT — see the `LICENSE` file. Generated GDS, models, and docs provided as-is, without warranty.
