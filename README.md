@@ -7,12 +7,22 @@
 [![PDK](https://img.shields.io/badge/PDK-sky130-8a2be2)](https://github.com/google/skywater-pdk)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
 
-> **AI‑driven Paper‑to‑Chip.** From the paper (Williams *et al.*, IEEE CICC 2004) to a tapeout‑ready
-> sky130 mixed‑signal chip — the RTL, the analog PLL macro, chip integration, and signoff were produced
-> by an AI design agent. **📖 Full write-up: [si-hive.com/paper-to-chip](https://si-hive.com/paper-to-chip).**
+## 📖 The story behind this repo
 
-A dual‑control‑path CMOS **ring‑oscillator PLL** with **< 4 ps RMS accumulated jitter**, reproduced
-end‑to‑end on the open‑source **sky130** PDK.
+We gave agentic AI a single input — a published IEEE PLL paper — and let it drive the
+entire flow to a **clean sky130 mixed-signal chip**: circuit design, analog layout,
+digital hardening (synth / STA / CTS / DFT), chip assembly, and DRC/LVS signoff. The
+analog PLL macro (`PLLTOP4_D40`) **locks at 270 MHz across all corners with deterministic
+jitter under 5 ps**, DRC-clean and LVS-matched.
+
+**→ Read the full write-up: https://si-hive.com/paper-to-chip**
+
+**What's in here** (MIT-licensed): the chip and macro **GDS**, **behavioural + real-number
+(RNM) models**, **schematics and symbols**, and the **signoff reports** (DRC / LVS / timing /
+lock-detect). Study it, simulate the models (~2 min), reuse the blocks, retarget it to
+another open PDK, or build on top — students, researchers, hobbyists, and startups welcome.
+
+Built by **[Si-Hive](https://si-hive.com)** — AI-driven mixed-signal chip design.
 
 ![PLL chip snapshot](doc_images/pll_chip_snapshot.png)
 
