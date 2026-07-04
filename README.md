@@ -2,9 +2,14 @@
 
 # AI-driven Paper‑to‑Chip: an Open‑Source sky130 Ring‑Oscillator PLL
 
+[![SiHive](https://img.shields.io/badge/SiHive-si--hive.com-00b8d4)](https://si-hive.com)
+[![Write-up](https://img.shields.io/badge/write--up-paper--to--chip-00b8d4)](https://si-hive.com/paper-to-chip)
+[![PDK](https://img.shields.io/badge/PDK-sky130-8a2be2)](https://github.com/google/skywater-pdk)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen)](LICENSE)
+
 > **AI‑driven Paper‑to‑Chip.** From the paper (Williams *et al.*, IEEE CICC 2004) to a tapeout‑ready
 > sky130 mixed‑signal chip — the RTL, the analog PLL macro, chip integration, and signoff were produced
-> by an AI design agent.
+> by an AI design agent. **📖 Full write-up: [si-hive.com/paper-to-chip](https://si-hive.com/paper-to-chip).**
 
 A dual‑control‑path CMOS **ring‑oscillator PLL** with **< 4 ps RMS accumulated jitter**, reproduced
 end‑to‑end on the open‑source **sky130** PDK.
@@ -80,8 +85,13 @@ The proprietary automated‑layout engine that generated the analog macro is int
 repository ships the **generated artifacts** (GDS, models, docs) only. The analog PLL is delivered as a
 verified hard macro.
 
-## Contact
-Questions, issues, or collaboration: **assist@si-hive.com** (or open a GitHub issue).
+## About & links
+Built at **SiHive** — [si-hive.com](https://si-hive.com) · silicon design & EDA automation.
+
+📖 **Full write-up:** [How this PLL went from paper to GDS with an AI design agent](https://si-hive.com/paper-to-chip)
+— the corner results, the 100–300 MHz range, the lock-witness, and the open-source story.
+
+💬 **Contact:** questions / collaboration → **assist@si-hive.com**, or open a GitHub issue.
 
 ## License
 **MIT** (see [LICENSE](LICENSE)). Generated GDS, models, and docs are provided as‑is, without warranty.
