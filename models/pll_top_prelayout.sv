@@ -19,7 +19,7 @@
 //        time (~1.5 us ~= 8 * tau_L, tau_L = 177 ns loop time constant).
 //      * lock detect (edge-alignment / frequency window) with LOCKED output.
 //      * PG (power-good / enable) gating: PLL only runs when PG == 1.
-//      * a small, deterministic ideal-jitter knob (paper target < 4 ps RMS).
+//      * a small, deterministic ideal period-jitter knob (default 0).
 //
 //  This is the "golden / ideal" sibling of pll_top_postlayout.sv.  The two are
 //  DROP-IN INTERCHANGEABLE: identical port list and identical parameter list.
@@ -38,9 +38,9 @@ module pll_top #(
     // ---- user-tunable parameters (identical set in the post-layout model) ----
     parameter integer M          = 10,           // feedback divide ratio
     parameter real    F_REF_HZ   = 27.0e6,       // reference frequency  [Hz]
-    parameter real    JITTER_PS  = 0.0,          // RMS cycle jitter on PLL_CLK [ps]
+    parameter real    JITTER_PS  = 0.0,          // period jitter on PLL_CLK [ps]
                                                  //   (prelayout ideal: 0; can be
-                                                 //    set to the <4 ps paper target)
+                                                 //    (period-jitter knob)
     parameter real    LOCK_TAU_S = 177.0e-9,     // loop time constant tau_L  [s]
     parameter real    SETTLE_S   = 1.5e-6,       // time to declare lock       [s]
     parameter real    FREERUN_HZ = 120.0e6,      // VCO free-run freq @ enable [Hz]

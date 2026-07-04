@@ -10,9 +10,8 @@
 //  reproduced on sky130.
 //
 //  Differences vs the pre-layout / ideal model:
-//      * RMS accumulated jitter = 4.83 ps injected as Gaussian noise on
-//        every PLL_CLK edge (paper target was < 4 ps; this is the measured
-//        close).
+//      * a period-jitter injection knob (JITTER_PS, default 0) adds Gaussian
+//        noise on every PLL_CLK edge; magnitude set per characterization.
 //      * corner-parameterised settling: the SS corner settles slower and more
 //        oscillatory than TT / FF; hooks for TT / FF / SS via the CORNER parameter.
 //
@@ -30,7 +29,7 @@ module pll_top #(
     // ---- SAME parameter list as the pre-layout model (drop-in) ----
     parameter integer M          = 10,
     parameter real    F_REF_HZ   = 27.0e6,
-    parameter real    JITTER_PS  = 4.83,         // MEASURED close: 4.83 ps RMS
+    parameter real    JITTER_PS  = 0.0,          // period-jitter injection [ps] (set per characterization)
     parameter real    LOCK_TAU_S = 177.0e-9,     // nominal loop time constant
     parameter real    SETTLE_S   = 1.5e-6,       // nominal settle (TT/FF)
     parameter real    FREERUN_HZ = 120.0e6,
@@ -126,7 +125,7 @@ module pll_top #(
         if (acq_freq < 1.0e6) acq_freq = 1.0e6;
     endfunction
 
-    // Gaussian jitter (Box-Muller on a 32-bit LCG) -- measured 4.83 ps RMS
+    // Gaussian period jitter (Box-Muller on a 32-bit LCG), magnitude = JITTER_PS
     integer rng_state;
     initial rng_state = SEED;
     function real urand01;
@@ -142,7 +141,7 @@ module pll_top #(
     // Jitter injection: we add an independent Gaussian offset to each PLL_CLK
     // edge.  A measured PERIOD is the difference of two consecutive, i.i.d.
     // edge offsets, so its RMS is sigma_edge * sqrt(2).  To make the *measured*
-    // period-jitter RMS equal the target JITTER_PS (4.83 ps), inject a per-edge
+    // period jitter equal the target JITTER_PS, inject a per-edge
     // sigma of JITTER_PS / sqrt(2).  This is what makes the model's reported
     // jitter match the datasheet/measured close.
     localparam real SIG_EDGE_PS = JITTER_PS / 1.41421356237;

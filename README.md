@@ -41,21 +41,27 @@ Built by **[Si-Hive](https://si-hive.com)** — AI-driven mixed-signal chip desi
 - **Behavioral models included**: SystemVerilog (pre‑ and post‑layout) + a Real‑Number Model (RNM).
 
 ## Inside the analog PLL
-The delivered analog macro **`PLLTOP4_D40`** — a self-biased **dual-control-path ring-oscillator PLL**
-with an **on-chip ÷40** that divides the 270 MHz VCO clock down to a pad-safe ≈ 6.75 MHz (`CK_DIV40`),
-so the fast clock never leaves the analog.
+The delivered analog macro **`PLLTOP4_D40`** is a self-biased **dual-control-path ring-oscillator PLL**
+with an **on-chip ÷40** (pad-safe ≈ 6.75 MHz `CK_DIV40`). It builds up from the analog loop core outward —
+**all three GDS are in [`gds/`](gds)** *(click any figure to zoom)*:
+
+**`PLLTOP_AnaCore` — analog loop core** · the active devices: PFD · charge pump · ring VCO · ÷M · regulator · bias (loop-filter caps external).
+
+[![PLLTOP_AnaCore](doc_images/PLLTOP_AnaCore.png)](doc_images/PLLTOP_AnaCore.png)
+
+**`PLLTOP4` — PLL core** · the loop core plus the loop-filter / gm-C cap banks (no output divider).
+
+[![PLLTOP4 core](doc_images/PLLTOP4_layout.png)](doc_images/PLLTOP4_layout.png)
+
+**`PLLTOP4_D40` — delivered hard macro** · the PLL core + on-chip ÷40 (highlighted) → `CK_DIV40`.
 
 [![PLLTOP4_D40 macro](doc_images/PLLTOP4_D40_layout.png)](doc_images/PLLTOP4_D40_layout.png)
-
-*(click to zoom — the ÷40 divider highlighted, with a block legend: PFD · charge pump · loop filter ·
-gm-C coarse · dual-control ring VCO · ÷M feedback · regulator · bias.)*
 
 ## Specs (nominal)
 | Parameter | Value |
 |---|---|
 | Reference / output | 27 MHz → 270 MHz (÷M, M = 10) |
 | Tuning range | 100 – 300 MHz (3:1, no band switching) |
-| Jitter | < 4 ps RMS (4.83 ps measured close) |
 | Output divider | ÷40 on‑macro → `CK_DIV40` ≈ 6.75 MHz |
 | Supply / process | 1.8 V / sky130 (0.36 mm² analog, 1.90 × 1.90 mm chip) |
 
@@ -78,7 +84,7 @@ down to the 270 MHz target, the control voltage settles, and `lock_detect` asser
 ## Repository layout
 | Folder | Contents |
 |---|---|
-| [`gds/`](gds) | generated GDS (compressed): chip + analog macro + digital core |
+| [`gds/`](gds) | generated GDS (gz): chip · analog macro `PLLTOP4_D40` · PLL core `PLLTOP4` · loop core `PLLTOP_AnaCore` · digital core |
 | [`schematics/`](schematics) | analog design schematics (xschem `.sch`) + device-level SPICE |
 | [`symbols/`](symbols) | analog block symbols (xschem `.sym`) + macro abstracts (LEF) |
 | [`models/`](models) | SystemVerilog (pre/post‑layout) + Real‑Number (RNM) models + testbench |
@@ -91,7 +97,7 @@ down to the 270 MHz target, the control voltage settles, and `lock_detect` asser
 ```bash
 cd models && ./run_models.sh        # iverilog/Verilator: prelayout · postlayout · RNM → ALL_PASS
 ```
-Checks: PLL_CLK locks to 270 MHz (±1 %), ÷M = 10, post‑layout jitter ≈ 4.83 ps RMS.
+Checks: PLL_CLK locks to 270 MHz (±1 %), ÷M = 10.
 
 ## Use the GDS
 ```bash

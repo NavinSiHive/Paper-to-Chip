@@ -1,7 +1,7 @@
 # Mixed-Signal Ring-Oscillator PLL Chip — Architecture & Verification
 
 Reproduction of the Williams et al. dual-control-path CMOS ring-oscillator PLL (IEEE CICC 2004,
-"<4 ps RMS accumulated jitter") on the open-source **sky130** PDK. Mixed-signal: a self-contained
+on the open-source **sky130** PDK. Mixed-signal: a self-contained
 analog PLL core wrapped by a digital control / IO subsystem, in a padframe.
 
 ## Block diagram
@@ -40,7 +40,6 @@ gate (which also protects the CMOS output pad — see IO note), SPI configuratio
 |---|---|---|
 | F_REF / F_VCO | 27 MHz / 270 MHz | M = 10 |
 | Tuning range | 100–300 MHz (3:1) | no band-switching |
-| Jitter | <4 ps RMS target | 4.83 ps measured close |
 | Supply / process | 1.8 V / sky130 | |
 
 ## IO / output-clock note (important)

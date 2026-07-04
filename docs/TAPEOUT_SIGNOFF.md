@@ -40,7 +40,7 @@ supersedes it. v2 verdict was also SIGNED OFF.
 | 9 | GDS integrity | **single top `pll_chip`** · on-grid (0 off-grid) · 1902×1900 µm = 3.61 mm² |
 | 10 | ÷40 output path | `CK_DIV40` (÷40, ~6.75 MHz) physically traces PLLTOP_D40 → `PLLCLK_OUT` pad + digital, on continuous met3 |
 | 11 | IO / LVDS | no LVDS in open sky130 → CMOS gpio; ÷40 in the analog macro makes the pad clock 6.75 MHz (≤7.5 MHz at 300 MHz lock peak) — pad-safe |
-| 12 | SV + RNM models (pre/post/RNM) | **ALL_PASS** (iverilog + Verilator): lock 270 MHz ±1%, ÷M=10, post-layout jitter 4.867 ps ≈ 4.83 ps |
+| 12 | SV + RNM models (pre/post/RNM) | **ALL_PASS** (iverilog + Verilator): lock 270 MHz ±1%, ÷M=10 |
 
 ## Residuals — standard pre-mask steps (NOT design bugs)
 1. **IO-cell DRC waiver.** The 75 DRC items are all foundry IO-pad-cell-internal or pre-hardened

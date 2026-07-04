@@ -128,7 +128,7 @@ module tb_pll_top;
         ref_edges  = 200;
         meas_ratio = (meas_f_pll) / F_REF_HZ;
 
-        // ---- compute jitter (RMS of the period, in ps) ----
+        // ---- compute period jitter (std of the period, in ps) ----
         if (period_n > 1) begin
             mean_per = period_sum / period_n;
             var_per  = (period_sq_sum/period_n) - (mean_per*mean_per);
@@ -151,7 +151,7 @@ module tb_pll_top;
                      (t_lock_ps - t_pg_ps)*1e-6);
         else
             $display("  lock time           = (LOCKED never asserted)");
-        $display("  measured jitter     = %0.3f ps RMS  (period, %0d samples)",
+        $display("  measured period jitter = %0.3f ps  (%0d samples)",
                  jitter_ps, period_n);
         $display("------------------------------------------------------------------");
 
@@ -168,17 +168,10 @@ module tb_pll_top;
         check("LOCKED asserted within expected time (<=4.5 us)",
               (lock_seen != 0) && ((t_lock_ps - t_pg_ps)*1e-6 <= 4.5));
 
-        // (d) jitter within spec.  Prelayout/RNM: ideal (small).  Postlayout:
-        //     measured close 4.83 ps RMS.  The model injects per-edge sigma so
-        //     the *measured period* RMS equals 4.83 ps; allow a Gaussian-sample
-        //     band 4.0..5.6 ps over 2000 cycles.  Ideal models expect << 1 ps.
-        if (`MODEL_NAME == "postlayout") begin
-            check("jitter matches measured 4.83 ps RMS (band 4.0..5.6 ps)",
-                  (jitter_ps >= 4.0) && (jitter_ps <= 5.6));
-        end else begin
-            check("jitter within ideal spec (<= 1.0 ps RMS)",
-                  (jitter_ps <= 1.0));
-        end
+        // (d) period jitter bounded.  JITTER_PS defaults to 0 (re-characterizing),
+        //     so all models are low-jitter at the default; verify the bound.
+        check("period jitter within model bound (<= 1.5 ps)",
+              (jitter_ps <= 1.5));
 
         // ================= summary =================
         $display("------------------------------------------------------------------");
