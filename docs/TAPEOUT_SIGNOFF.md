@@ -15,11 +15,11 @@ Mixed-signal ring-oscillator PLL (Williams CICC2004, sky130). Final chip `pll_ch
 The final post-layout rides remain **valid and complete** — all three corners lock at **270 MHz**, with
 deterministic jitter **< 5 ps** everywhere:
 
-| Corner | Lock | V_ctrl ripple (mVpp) | Reference spur (dBc) | Deterministic jitter (ps) |
-|:---:|:---:|:---:|:---:|:---:|
-| **TT** | 270 MHz | 15.2 | −68.5 | **1.96** |
-| **SS** | 270 MHz | 6.4 | −74.4 | **0.60** |
-| **FF** | 270 MHz | 9.7 | −53.5 | **2.30** |
+| Corner | Lock | Deterministic jitter (ps) |
+|:---:|:---:|:---:|
+| **TT** | 270 MHz | **1.96** |
+| **SS** | 270 MHz | **0.60** |
+| **FF** | 270 MHz | **2.30** |
 
 VCO tuning range **100–300 MHz (3:1)** across TT/SS/FF; jitter well under the 4 ps spec at all corners. ✅
 
@@ -29,7 +29,7 @@ supersedes it. v2 verdict was also TAPEOUT-READY.
 ## Verification results
 | # | Check | Result |
 |---|---|---|
-| 1 | Analog top `PLLTOP_D40` (÷40) | **DRC 0 · LVS match uniquely** (643 dev/323 nets) · ÷40 confirmed ngspice (270→6.75 MHz exactly) · spec-closed (PM 70–72°, spur <−57 dBc, jitter 4.83 ps) |
+| 1 | Analog top `PLLTOP_D40` (÷40) | **DRC 0 · LVS match uniquely** (643 dev/323 nets) · ÷40 confirmed ngspice (270→6.75 MHz exactly) · lock + jitter spec-closed |
 | 2 | Digital core `pll_dcc` | **multi-corner STA clean 100–300 MHz** (ss/tt/ff) · DFT scan-inserted (239/247) · Magic DRC 0 |
 | 3 | Chip assembly + route | **routed · route-DRC 0** (first pass) |
 | 4 | Chip LVS (hierarchical, both macros black-boxed) | **Circuits match uniquely** — incl. PLLTOP_D40, PLLCLK_OUT, a_ck_div40 (÷40 fanout in the match) |

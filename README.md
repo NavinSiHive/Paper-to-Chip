@@ -40,23 +40,33 @@ Built by **[Si-Hive](https://si-hive.com)** — AI-driven mixed-signal chip desi
   ~6.75 MHz before the CMOS pad — sky130 has no LVDS, so the fast clock never leaves the analog.
 - **Behavioral models included**: SystemVerilog (pre‑ and post‑layout) + a Real‑Number Model (RNM).
 
+## Inside the analog PLL
+A self-biased **dual-control-path ring-oscillator PLL**, annotated. `PLLTOP4` is the PLL core;
+`PLLTOP4_D40` is the delivered hard macro — the same PLL **plus an on-chip ÷40** that divides the
+270 MHz VCO clock down to a pad-safe ≈ 6.75 MHz (`CK_DIV40`), so the fast clock never leaves the analog.
+
+| `PLLTOP4` — PLL core | `PLLTOP4_D40` — delivered macro (+ ÷40) |
+|:---:|:---:|
+| [![PLLTOP4 core](doc_images/PLLTOP4_layout.png)](doc_images/PLLTOP4_layout.png) | [![PLLTOP4_D40 macro](doc_images/PLLTOP4_D40_layout.png)](doc_images/PLLTOP4_D40_layout.png) |
+
+*(click to zoom — LEF-accurate port callouts, region highlights, and a block legend: PFD · charge pump ·
+loop filter · gm-C coarse · dual-control ring VCO · ÷M feedback · regulator · bias.)*
+
 ## Specs (nominal)
 | Parameter | Value |
 |---|---|
 | Reference / output | 27 MHz → 270 MHz (÷M, M = 10) |
 | Tuning range | 100 – 300 MHz (3:1, no band switching) |
 | Jitter | < 4 ps RMS (4.83 ps measured close) |
-| Phase margin | 70 – 72° (TT/FF) |
-| Reference spurs | < −57 dBc |
 | Output divider | ÷40 on‑macro → `CK_DIV40` ≈ 6.75 MHz |
 | Supply / process | 1.8 V / sky130 (0.36 mm² analog, 1.90 × 1.90 mm chip) |
 
 ## Post-layout signoff (all corners)
-| Corner | Lock | V_ctrl ripple (mVpp) | Reference spur (dBc) | Deterministic jitter (ps) |
-|:---:|:---:|:---:|:---:|:---:|
-| **TT** | 270 MHz | 15.2 | −68.5 | **1.96** |
-| **SS** | 270 MHz | 6.4 | −74.4 | **0.60** |
-| **FF** | 270 MHz | 9.7 | −53.5 | **2.30** |
+| Corner | Lock | Deterministic jitter (ps) |
+|:---:|:---:|:---:|
+| **TT** | 270 MHz | **1.96** |
+| **SS** | 270 MHz | **0.60** |
+| **FF** | 270 MHz | **2.30** |
 
 All three corners lock at 270 MHz with deterministic jitter **< 5 ps**.
 

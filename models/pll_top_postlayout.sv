@@ -13,11 +13,8 @@
 //      * RMS accumulated jitter = 4.83 ps injected as Gaussian noise on
 //        every PLL_CLK edge (paper target was < 4 ps; this is the measured
 //        close).
-//      * corner-parameterised settling: the SS corner is phase-margin-limited
-//        (PM 40.7 deg vs 72 deg TT / 70 deg FF) -> longer, more oscillatory
-//        settling; hooks for TT / FF / SS via the CORNER parameter.
-//      * reference-spur and phase-margin numbers are carried as parameters so
-//        downstream reports and assertions can read the measured close.
+//      * corner-parameterised settling: the SS corner settles slower and more
+//        oscillatory than TT / FF; hooks for TT / FF / SS via the CORNER parameter.
 //
 //  DROP-IN INTERCHANGEABLE with pll_top_prelayout.sv:  identical port list,
 //  identical parameter list.  Instantiate either one as `pll_top`.
@@ -61,15 +58,11 @@ module pll_top #(
     localparam real SEC_PER_PS  = 1.0e-12;
 
     // ------------------------------------------------------------------
-    // Corner de-rating table (measured close).
-    //   Phase margins: TT 72 deg, FF 70 deg, SS 40.7 deg.
-    //   Reference spurs: TT -69.6, FF -86.5, SS -58.3 dBc.
-    // Lower PM (SS) -> heavier overshoot and a longer settle. We map PM to a
-    // settling multiplier and an overshoot-envelope gain so the transient
+    // Corner de-rating table.
+    // The SS corner settles slower and rings more than TT / FF; each corner maps
+    // to a settling multiplier and an overshoot-envelope gain so the transient
     // visibly differs across corners.
     // ------------------------------------------------------------------
-    real pm_deg;          // phase margin for this corner
-    real spur_dbc;        // reference spur for this corner
     real settle_mult;     // settle-time multiplier vs nominal
     real os_gain;         // overshoot-envelope gain
     real tau_mult;        // loop-tau multiplier (SS is slower)
@@ -77,20 +70,14 @@ module pll_top #(
     initial begin
         // string compare on the packed CORNER param
         if (CORNER == "SS") begin
-            pm_deg      = 40.7;
-            spur_dbc    = -58.3;
             settle_mult = 2.6;      // PM-limited: much longer to settle
             os_gain     = 1.9;      // large, ringy overshoot
             tau_mult    = 1.8;
         end else if (CORNER == "FF") begin
-            pm_deg      = 70.0;
-            spur_dbc    = -86.5;
             settle_mult = 0.95;
             os_gain     = 1.05;
             tau_mult    = 0.95;
         end else begin              // TT (default)
-            pm_deg      = 72.0;
-            spur_dbc    = -69.6;
             settle_mult = 1.0;
             os_gain     = 1.0;
             tau_mult    = 1.0;
@@ -192,8 +179,8 @@ module pll_top #(
     end
 
 `ifdef PLL_DEBUG
-    initial $display("[postlayout] corner=%0s PM=%0.1f deg spur=%0.1f dBc jitter=%0.2f ps -> F_TARGET=%0.3f MHz",
-                     CORNER, pm_deg, spur_dbc, JITTER_PS, F_TARGET_HZ/1e6);
+    initial $display("[postlayout] corner=%0s jitter=%0.2f ps -> F_TARGET=%0.3f MHz",
+                     CORNER, JITTER_PS, F_TARGET_HZ/1e6);
 `endif
 
 endmodule

@@ -128,7 +128,7 @@ module pll_top #(
     //
     // We synthesize this as: target + (overshoot term) shaped by an
     // exponentially-decaying sinusoid -- the classic 2nd/3rd-order loop step
-    // response with the paper's ~70 deg phase margin (light overshoot).
+    // response with a light, corner-dependent overshoot.
     // ------------------------------------------------------------------
     function real acq_freq(input real t_since_en);
         real x, env, ramp;

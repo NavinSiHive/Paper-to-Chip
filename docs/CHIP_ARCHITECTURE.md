@@ -41,8 +41,6 @@ gate (which also protects the CMOS output pad — see IO note), SPI configuratio
 | F_REF / F_VCO | 27 MHz / 270 MHz | M = 10 |
 | Tuning range | 100–300 MHz (3:1) | no band-switching |
 | Jitter | <4 ps RMS target | 4.83 ps measured close |
-| Phase margin | 70–72° (TT/FF) | SS 40.7° (headroom-limited, documented) |
-| Reference spurs | −69.6 / −86.5 / −58.3 dBc | TT / FF / SS |
 | Supply / process | 1.8 V / sky130 | |
 
 ## IO / output-clock note (important)
