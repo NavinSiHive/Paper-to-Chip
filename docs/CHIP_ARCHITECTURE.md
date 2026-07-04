@@ -39,7 +39,7 @@ gate (which also protects the CMOS output pad — see IO note), SPI configuratio
 | | nominal | note |
 |---|---|---|
 | F_REF / F_VCO | 27 MHz / 270 MHz | M = 10 |
-| Tuning range | 100–500 MHz (5:1) | no band-switching |
+| Tuning range | 100–300 MHz (3:1) | no band-switching |
 | Jitter | <4 ps RMS target | 4.83 ps measured close |
 | Phase margin | 70–72° (TT/FF) | SS 40.7° (headroom-limited, documented) |
 | Reference spurs | −69.6 / −86.5 / −58.3 dBc | TT / FF / SS |
@@ -47,16 +47,16 @@ gate (which also protects the CMOS output pad — see IO note), SPI configuratio
 
 ## IO / output-clock note (important)
 sky130's open IO library has **no LVDS / differential buffer**; digital I/O uses CMOS `gpiov2` pads
-(max ~tens of MHz). The raw VCO clock (270 MHz nominal, up to ~500 MHz during lock acquisition) is
+(max ~tens of MHz). The raw VCO clock (270 MHz nominal, up to ~300 MHz (range top) during lock acquisition) is
 therefore **never routed to a pad directly**.
 
 **The output clock is divided by 40 INSIDE the analog macro.** The analog top `PLLTOP_D40` contains an
 on-macro ÷40 divider (÷4 × ÷10, from verified CAL cells) that taps the internal CMOS `PLL_CLK` and
 drives a dedicated output pin **`CK_DIV40`**:
 ```
-   PLL_CLK (270 MHz / ≤500 MHz peak) ──▶ ÷40 ──▶ CK_DIV40 (6.75 MHz nom / ≤12.5 MHz peak) ──▶ PLLCLK_OUT pad
+   PLL_CLK (270 MHz / ≤300 MHz peak) ──▶ ÷40 ──▶ CK_DIV40 (6.75 MHz nom / ≤7.5 MHz peak) ──▶ PLLCLK_OUT pad
 ```
-6.75 MHz is comfortably within the CMOS gpio pad, and the pad is protected even during the ~500 MHz
+6.75 MHz is comfortably within the CMOS gpio pad, and the pad is protected even during the ~300 MHz
 lock-acquisition sweep (÷40 → 12.5 MHz). The digital core observes `CK_DIV40` for status/gating; the
 raw fast clock never leaves the analog. A true high-speed off-chip clock would require a custom LVDS
 driver (out of scope for open sky130).
@@ -65,10 +65,7 @@ driver (out of scope for open sky130).
 | Item | Result |
 |---|---|
 | Analog top `PLLTOP` | DRC 0 · LVS match uniquely (363 dev/183 nets) · spec-closed |
-| Digital core `pll_dcc` | multi-corner STA clean (100–500 MHz), DFT scan-inserted, Magic DRC 0 |
+| Digital core `pll_dcc` | multi-corner STA clean (100–300 MHz), DFT scan-inserted, Magic DRC 0 |
 | Chip (hierarchical) | assembled, route-DRC 0, chip-LVS match (see reports/) |
 | GDS integrity | single top cell · on-grid · density within limits |
 | SV + RNM models | REFCLK→PLL_CLK lock + ÷M verified (see models/) |
-
----
-**License:** MIT — see the `LICENSE` file. Generated GDS, models, and docs provided as-is, without warranty.

@@ -1,0 +1,33 @@
+v {xschem version=3.4.6 file_version=1.2}
+G {}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+V {}
+S {}
+E {}
+L 4 -112 -100 112 -100 {}
+L 4 112 -100 112 100 {}
+L 4 112 100 -112 100 {}
+L 4 -112 100 -112 -100 {}
+L 4 -142 -60 -112 -60 {}
+L 4 142 -60 112 -60 {}
+L 4 -142 20 -112 20 {}
+L 4 142 20 112 20 {}
+L 4 0 -130 0 -100 {}
+L 4 0 130 0 100 {}
+B 5 -144.5 -62.5 -139.5 -57.5 {name=REFCLK dir=inout}
+B 5 139.5 -62.5 144.5 -57.5 {name=FBCLK dir=inout}
+B 5 -144.5 17.5 -139.5 22.5 {name=UP dir=inout}
+B 5 139.5 17.5 144.5 22.5 {name=DN dir=inout}
+B 5 -2.5 -132.5 2.5 -127.5 {name=VDD dir=inout}
+B 5 -2.5 127.5 2.5 132.5 {name=VSS dir=inout}
+T {@symname} -104 -122 0 0 0.3 0.3 {}
+T {@name} -104 -92 0 0 0.25 0.25 {}
+T {REFCLK} -102 -56 0 0 0.2 0.2 {}
+T {FBCLK} 67 -56 0 0 0.2 0.2 {}
+T {UP} -102 24 0 0 0.2 0.2 {}
+T {DN} 88 24 0 0 0.2 0.2 {}
+T {VDD} -11 -88 0 0 0.2 0.2 {}
+T {VSS} -11 84 0 0 0.2 0.2 {}

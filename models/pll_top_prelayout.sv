@@ -15,7 +15,7 @@
 //      * F_REF = 27 MHz reference  ->  F_VCO = M * F_REF = 270 MHz (M = 10)
 //      * lock-acquisition transient: VCO frequency ramps from its free-run
 //        value UP through an over-range excursion (paper's coarse path sweeps
-//        toward ~400-500 MHz) and settles to 270 MHz over the loop settling
+//        toward ~~300 MHz) and settles to 270 MHz over the loop settling
 //        time (~1.5 us ~= 8 * tau_L, tau_L = 177 ns loop time constant).
 //      * lock detect (edge-alignment / frequency window) with LOCKED output.
 //      * PG (power-good / enable) gating: PLL only runs when PG == 1.

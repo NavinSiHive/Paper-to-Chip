@@ -31,7 +31,7 @@ consecutive *bad* windows does lock drop + set sticky `lock_lost` (KBAD default 
 near the tolerance edge cannot cause lock chatter.
 
 - **Range:** because the ratio `CK_DIV40/REFCLK = 1/4` is constant, **one setting covers the entire
-  100–500 MHz VCO range** (F_ref 10–50 MHz → CK_DIV40 2.5–12.5 MHz). REFCLK oversamples CK_DIV40 4× at
+  100–300 MHz VCO range** (F_ref 10–30 MHz → CK_DIV40 2.5–7.5 MHz). REFCLK oversamples CK_DIV40 4× at
   all points, so edge detection is always clean.
 - **Resolution / lock band:** set by WIN and TOL. Production default **WIN=256, EXP=64, TOL=3** → lock
   band ≈ ±4.7 %; e.g. WIN=1024 tightens to ~±1 %. Fully tunable, `lockw` (K) is CSR-configurable.

@@ -1,0 +1,426 @@
+VERSION 5.8 ;
+BUSBITCHARS "[]" ;
+DIVIDERCHAR "/" ;
+UNITS
+    DATABASE MICRONS 1000 ;
+END UNITS
+
+MACRO pll_dcc
+  FOREIGN pll_dcc 0 0 ;
+  CLASS BLOCK ;
+  SIZE 188.99 BY 188.99 ;
+  PIN clk_out_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 69.55 0.8 69.85 ;
+    END
+  END clk_out_o
+  PIN cp_iset_o[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  188.19 81.79 188.99 82.09 ;
+    END
+  END cp_iset_o[0]
+  PIN cp_iset_o[1]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  82.96 188.505 83.1 188.99 ;
+    END
+  END cp_iset_o[1]
+  PIN cp_iset_o[2]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 70.91 0.8 71.21 ;
+    END
+  END cp_iset_o[2]
+  PIN cp_iset_o[3]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  85.72 0 85.86 0.485 ;
+    END
+  END cp_iset_o[3]
+  PIN cp_iset_o[4]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  120.68 188.505 120.82 188.99 ;
+    END
+  END cp_iset_o[4]
+  PIN cp_iset_o[5]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  188.19 99.47 188.99 99.77 ;
+    END
+  END cp_iset_o[5]
+  PIN cp_iset_o[6]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  188.19 110.35 188.99 110.65 ;
+    END
+  END cp_iset_o[6]
+  PIN cp_iset_o[7]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 98.11 0.8 98.41 ;
+    END
+  END cp_iset_o[7]
+  PIN div_rst_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  139.08 188.505 139.22 188.99 ;
+    END
+  END div_rst_o
+  PIN dn_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  2 0 2.14 0.485 ;
+    END
+  END dn_i
+  PIN en_cp_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  121.6 188.505 121.74 188.99 ;
+    END
+  END en_cp_o
+  PIN en_vco_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  122.52 188.505 122.66 188.99 ;
+    END
+  END en_vco_o
+  PIN en_vreg_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  130.8 188.505 130.94 188.99 ;
+    END
+  END en_vreg_o
+  PIN lock_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  95.84 0 95.98 0.485 ;
+    END
+  END lock_o
+  PIN m_div_o[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 132.11 0.8 132.41 ;
+    END
+  END m_div_o[0]
+  PIN m_div_o[1]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 102.19 0.8 102.49 ;
+    END
+  END m_div_o[1]
+  PIN m_div_o[2]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 88.59 0.8 88.89 ;
+    END
+  END m_div_o[2]
+  PIN m_div_o[3]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  2 188.505 2.14 188.99 ;
+    END
+  END m_div_o[3]
+  PIN m_div_o[4]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  2.92 188.505 3.06 188.99 ;
+    END
+  END m_div_o[4]
+  PIN m_div_o[5]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 138.91 0.8 139.21 ;
+    END
+  END m_div_o[5]
+  PIN m_div_o[6]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 114.43 0.8 114.73 ;
+    END
+  END m_div_o[6]
+  PIN m_div_o[7]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 99.47 0.8 99.77 ;
+    END
+  END m_div_o[7]
+  PIN pll_clk_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  59.04 0 59.18 0.485 ;
+    END
+  END pll_clk_i
+  PIN pll_en_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  127.12 188.505 127.26 188.99 ;
+    END
+  END pll_en_o
+  PIN ref_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  188.19 108.99 188.99 109.29 ;
+    END
+  END ref_o
+  PIN refclk_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 155.23 0.8 155.53 ;
+    END
+  END refclk_i
+  PIN rst_n_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  64.56 0 64.7 0.485 ;
+    END
+  END rst_n_i
+  PIN scan_en_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  78.36 0 78.5 0.485 ;
+    END
+  END scan_en_i
+  PIN scan_in_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  77.44 0 77.58 0.485 ;
+    END
+  END scan_in_i
+  PIN scan_out_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  80.2 0 80.34 0.485 ;
+    END
+  END scan_out_o
+  PIN spi_cs_n_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  35.12 188.505 35.26 188.99 ;
+    END
+  END spi_cs_n_i
+  PIN spi_sclk_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 181.07 0.8 181.37 ;
+    END
+  END spi_sclk_i
+  PIN spi_sdi_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 157.95 0.8 158.25 ;
+    END
+  END spi_sdi_i
+  PIN spi_sdo_o
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  68.24 188.505 68.38 188.99 ;
+    END
+  END spi_sdo_o
+  PIN test_clk_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  2.92 0 3.06 0.485 ;
+    END
+  END test_clk_i
+  PIN test_mode_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  123.44 188.505 123.58 188.99 ;
+    END
+  END test_mode_i
+  PIN up_i
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  3.84 0 3.98 0.485 ;
+    END
+  END up_i
+  PIN vco_band_o[0]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  96.76 0 96.9 0.485 ;
+    END
+  END vco_band_o[0]
+  PIN vco_band_o[1]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 100.83 0.8 101.13 ;
+    END
+  END vco_band_o[1]
+  PIN vco_band_o[2]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  66.4 0 66.54 0.485 ;
+    END
+  END vco_band_o[2]
+  PIN vco_band_o[3]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  79.28 0 79.42 0.485 ;
+    END
+  END vco_band_o[3]
+  PIN vco_band_o[4]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  92.16 188.505 92.3 188.99 ;
+    END
+  END vco_band_o[4]
+  PIN vco_band_o[5]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  94.92 188.505 95.06 188.99 ;
+    END
+  END vco_band_o[5]
+  PIN vco_band_o[6]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met2 ;
+        RECT  93.08 188.505 93.22 188.99 ;
+    END
+  END vco_band_o[6]
+  PIN vco_band_o[7]
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    PORT
+      LAYER met3 ;
+        RECT  0 106.27 0.8 106.57 ;
+    END
+  END vco_band_o[7]
+  PIN VDD
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met5 ;
+        RECT  1.38 165.12 187.68 166.72 ;
+        RECT  1.38 137.92 187.68 139.52 ;
+        RECT  1.38 110.72 187.68 112.32 ;
+        RECT  1.38 83.52 187.68 85.12 ;
+        RECT  1.38 56.32 187.68 57.92 ;
+        RECT  1.38 29.12 187.68 30.72 ;
+    END
+  END VDD
+  PIN VSS
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met5 ;
+        RECT  1.38 178.72 187.68 180.32 ;
+        RECT  1.38 151.52 187.68 153.12 ;
+        RECT  1.38 124.32 187.68 125.92 ;
+        RECT  1.38 97.12 187.68 98.72 ;
+        RECT  1.38 69.92 187.68 71.52 ;
+        RECT  1.38 42.72 187.68 44.32 ;
+        RECT  1.38 15.52 187.68 17.12 ;
+    END
+  END VSS
+  OBS
+    LAYER nwell ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER pwell ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER li1 ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER met1 ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER met2 ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER met3 ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER met4 ;
+     RECT  0 0 188.99 188.99 ;
+    LAYER met5 ;
+     RECT  0 0 188.99 188.99 ;
+  END
+END pll_dcc
+END LIBRARY

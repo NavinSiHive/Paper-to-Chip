@@ -1,0 +1,30 @@
+v {xschem version=3.4.6 file_version=1.2}
+G {}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=x1"
+}
+V {}
+S {}
+E {}
+L 4 -124 -100 124 -100 {}
+L 4 124 -100 124 100 {}
+L 4 124 100 -124 100 {}
+L 4 -124 100 -124 -100 {}
+L 4 0 130 0 100 {}
+L 4 -154 -60 -124 -60 {}
+L 4 154 -60 124 -60 {}
+L 4 -154 20 -124 20 {}
+L 4 154 20 124 20 {}
+B 5 -2.5 127.5 2.5 132.5 {name=VSS dir=inout}
+B 5 -156.5 -62.5 -151.5 -57.5 {name=VREG dir=inout}
+B 5 151.5 -62.5 156.5 -57.5 {name=VCOARSE dir=inout}
+B 5 -156.5 17.5 -151.5 22.5 {name=VFINE dir=inout}
+B 5 151.5 17.5 156.5 22.5 {name=VCO_CLK dir=inout}
+T {@symname} -116 -122 0 0 0.3 0.3 {}
+T {@name} -116 -92 0 0 0.25 0.25 {}
+T {VSS} -11 84 0 0 0.2 0.2 {}
+T {VREG} -114 -56 0 0 0.2 0.2 {}
+T {VCOARSE} 65 -56 0 0 0.2 0.2 {}
+T {VFINE} -114 24 0 0 0.2 0.2 {}
+T {VCO_CLK} 65 24 0 0 0.2 0.2 {}

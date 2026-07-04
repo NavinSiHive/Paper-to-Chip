@@ -23,7 +23,7 @@ Run: `signoff/run_lock_regress.sh` → **`REGRESS: ALL SUITES PASS`** (log: `reg
 | `dcc_lock` | 10 | **chip-level** through integrated core: SPI-configure → drive synthetic CK_DIV40 → verify **`LOCK` pad AND SPI STATUS** across lock / drift-to-lost (sticky) / SPI-W1C-clear / re-lock / PLL-disable · SPI `ID`=0xA5 |
 
 **Detector conclusions:** locks only when `CK_DIV40 = REFCLK/4` (F_VCO = M·F_ref, M=10) within a tunable
-band; frequency-invariant across the whole 100–500 MHz VCO range; dual hysteresis prevents lock chatter;
+band; frequency-invariant across the whole 100–300 MHz VCO range; dual hysteresis prevents lock chatter;
 lock reported off-chip via the **`LOCK` pin** and the **SPI STATUS register** (sticky `lock_lost`,
 W1C-clear). **No bugs in the detector.**
 
